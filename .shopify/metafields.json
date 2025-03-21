@@ -1,0 +1,26 @@
+{
+  "article": [],
+  "blog": [],
+  "brand": [],
+  "collection": [],
+  "company": [],
+  "company_location": [],
+  "location": [],
+  "market": [],
+  "order": [],
+  "page": [],
+  "product": [],
+  "variant": [
+    {
+      "key": "catalog_price",
+      "namespace": "netwise",
+      "name": "Netwise Catalog",
+      "description": null,
+      "type": {
+        "name": "json",
+        "category": "JSON"
+      }
+    }
+  ],
+  "shop": []
+}

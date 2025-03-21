@@ -451,6 +451,47 @@
   </div>
 </cart-items>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const cartForm = document.getElementById('cart');
+    const checkoutButton = document.querySelector('button[name="checkout"]'); // Adjust selector if necessary
+    const warningMessage = document.createElement('div');
+    warningMessage.className = 'cart-warning-message';
+    warningMessage.style.color = 'red';
+    warningMessage.style.marginTop = '10px';
+    warningMessage.style.display = 'none';
+    warningMessage.textContent = '{{ "sections.cart.validation_error" | t }}';
+    cartForm.appendChild(warningMessage);
+
+    function validateCart() {
+      const quantityInputs = cartForm.querySelectorAll('input[name="updates[]"]');
+      let totalQuantity = 0;
+
+      quantityInputs.forEach(input => {
+        totalQuantity += parseInt(input.value, 10) || 0;
+      });
+
+      if (totalQuantity < 12 || totalQuantity % 12 !== 0) {
+        warningMessage.style.display = 'block';
+        checkoutButton.disabled = true;
+      } else {
+        warningMessage.style.display = 'none';
+        checkoutButton.disabled = false;
+      }
+    }
+
+    // Validate on page load
+    validateCart();
+
+    // Validate on quantity change
+    cartForm.addEventListener('input', function (event) {
+      if (event.target.name === 'updates[]') {
+        validateCart();
+      }
+    });
+  });
+</script>
+
 {% schema %}
 {
   "name": "t:sections.main-cart-items.name",
@@ -485,6 +526,11 @@
       "label": "t:sections.all.padding.padding_bottom",
       "default": 36
     }
-  ]
+  ],
+  "sections": {
+    "cart": {
+      "validation_error": "Please ensure the total quantity is a multiple of 12."
+    }
+  }
 }
 {% endschema %}

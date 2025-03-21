@@ -320,7 +320,8 @@
       "login": {
         "title": "Have an account?",
         "paragraph_html": "<a href=\"{{ link }}\" class=\"link underlined-link\">Log in</a> to check out faster."
-      }
+      },
+      "validation_error": "Please ensure the total quantity is a multiple of 12."
     },
     "footer": {
       "payment": "Payment methods"
