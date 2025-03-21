@@ -98,6 +98,30 @@
           "on_secondary_button": "secondary_button_label",
           "secondary_button_border": "secondary_button_label"
         }
+      },
+      {
+        "type": "color",
+        "id": "color_primary_bg",
+        "label": "Primary Background",
+        "default": "#fffbea"
+      },
+      {
+        "type": "color",
+        "id": "color_primary_text",
+        "label": "Primary Text",
+        "default": "#1a1a1a"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent Yellow",
+        "default": "#fbe870"
+      },
+      {
+        "type": "color",
+        "id": "color_black",
+        "label": "Black",
+        "default": "#000000"
       }
     ]
   },

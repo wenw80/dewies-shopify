@@ -3595,3 +3595,61 @@ details-disclosure > details {
     transform: translateX(100%) scaleX(0);
   }
 }
+/* === Mr. Dewie's Global Theme Styles === */
+
+body {
+  background-color: #fffbea; /* Light yellow background */
+  color: #1a1a1a;            /* Dark charcoal text */
+  font-family: 'Montserrat', sans-serif;
+}
+
+a {
+  color: #000000;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #fbe870; /* Hover yellow */
+}
+
+button,
+.button,
+.shopify-payment-button {
+  background-color: #000000;
+  color: #fbe870;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+button:hover,
+.button:hover {
+  background-color: #1a1a1a;
+  color: #fff4c2;
+}
+
+.header,
+.site-header,
+.header-wrapper {
+  background-color: #fbe870;
+  color: #000000;
+}
+
+.footer,
+.footer__content {
+  background-color: #fbe870;
+  color: #000000;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+input,
+textarea,
+select {
+  border: 1px solid #000000;
+  background-color: #fffbea;
+  color: #1a1a1a;
+}
