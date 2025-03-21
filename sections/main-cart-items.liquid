@@ -17,6 +17,11 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  .checkout-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 {%- endstyle -%}
 
 {%- unless settings.cart_type == 'drawer' -%}
@@ -454,7 +459,7 @@
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const cartForm = document.getElementById('cart');
-    const checkoutButton = document.querySelector('button[name="checkout"]'); // Adjust selector if necessary
+    const checkoutButton = document.querySelector('button[name="checkout"]'); // Ensure this selector matches your checkout button
     const warningMessage = document.createElement('div');
     warningMessage.className = 'cart-warning-message';
     warningMessage.style.color = 'red';
@@ -462,6 +467,11 @@
     warningMessage.style.display = 'none';
     warningMessage.textContent = '{{ "sections.cart.validation_error" | t }}';
     cartForm.appendChild(warningMessage);
+
+    if (!checkoutButton) {
+      console.error('Checkout button not found. Please check the selector.');
+      return;
+    }
 
     function validateCart() {
       const quantityInputs = cartForm.querySelectorAll('input[name="updates[]"]');
@@ -474,14 +484,13 @@
       if (totalQuantity < 12 || totalQuantity % 12 !== 0) {
         warningMessage.style.display = 'block';
         checkoutButton.disabled = true;
-        checkoutButton.style.opacity = '0.5'; // Grey out the button
-        checkoutButton.style.cursor = 'not-allowed'; // Change cursor to indicate disabled state
+        checkoutButton.classList.add('checkout-disabled');
       } else {
         warningMessage.style.display = 'none';
         checkoutButton.disabled = false;
-        checkoutButton.style.opacity = '1'; // Restore button appearance
-        checkoutButton.style.cursor = 'pointer'; // Restore cursor
+        checkoutButton.classList.remove('checkout-disabled');
       }
+      console.log(checkoutButton.disabled);
     }
 
     // Validate on page load
