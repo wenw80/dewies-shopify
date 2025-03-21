@@ -474,9 +474,13 @@
       if (totalQuantity < 12 || totalQuantity % 12 !== 0) {
         warningMessage.style.display = 'block';
         checkoutButton.disabled = true;
+        checkoutButton.style.opacity = '0.5'; // Grey out the button
+        checkoutButton.style.cursor = 'not-allowed'; // Change cursor to indicate disabled state
       } else {
         warningMessage.style.display = 'none';
         checkoutButton.disabled = false;
+        checkoutButton.style.opacity = '1'; // Restore button appearance
+        checkoutButton.style.cursor = 'pointer'; // Restore cursor
       }
     }
 
