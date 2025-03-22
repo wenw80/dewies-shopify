@@ -525,7 +525,16 @@
     quantityButtons.forEach(button => {
       button.addEventListener('click', function () {
         console.log('Quantity button clicked'); // Log button click
-        setTimeout(validateCart, 0); // Delay validation to allow input value to update
+
+        // Find the associated input field
+        const quantityInput = button.closest('.quantity').querySelector('input[name="updates[]"]');
+        if (quantityInput) {
+          // Trigger validation after the input value updates
+          setTimeout(() => {
+            console.log('Quantity updated to:', quantityInput.value); // Log updated value
+            validateCart();
+          }, 0);
+        }
       });
     });
   });
