@@ -480,6 +480,15 @@
     warningMessage.textContent = '{{ "sections.cart.validation_error" | t }}';
     cartForm.appendChild(warningMessage);
 
+    // Debounce function to limit how often validateCart is called
+    function debounce(func, delay) {
+      let timeout;
+      return function (...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), delay);
+      };
+    }
+
     function validateCart() {
       console.log('Validating cart...'); // Check if the function is called
 
@@ -512,6 +521,9 @@
       console.log('Checkout button classes:', checkoutButton.className);
     }
 
+    // Debounced version of validateCart
+    const debouncedValidateCart = debounce(validateCart, 200);
+
     // Validate on page load
     console.log('Validating on page load...');
     validateCart();
@@ -520,7 +532,7 @@
     cartForm.addEventListener('input', function (event) {
       console.log('Input event triggered:', event.target); // Log the input event
       if (event.target.name === 'updates[]') {
-        validateCart();
+        debouncedValidateCart();
       }
     });
 
@@ -535,7 +547,7 @@
           // Trigger validation after the input value updates
           setTimeout(() => {
             console.log('Quantity updated to:', quantityInput.value); // Log updated value
-            validateCart();
+            debouncedValidateCart();
           }, 0);
         }
       }
