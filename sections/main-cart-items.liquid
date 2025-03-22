@@ -519,6 +519,15 @@
         validateCart();
       }
     });
+
+    // Listen for clicks on + and - buttons
+    const quantityButtons = cartForm.querySelectorAll('.quantity__button');
+    quantityButtons.forEach(button => {
+      button.addEventListener('click', function () {
+        console.log('Quantity button clicked'); // Log button click
+        setTimeout(validateCart, 0); // Delay validation to allow input value to update
+      });
+    });
   });
 </script>
 
