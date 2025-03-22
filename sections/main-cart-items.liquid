@@ -21,6 +21,7 @@
   .checkout-disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    pointer-events: none; /* Prevent clicks */
   }
 {%- endstyle -%}
 
@@ -463,7 +464,7 @@
     const cartForm = document.getElementById('cart');
     console.log('Cart form:', cartForm); // Check if the cart form is found
 
-    const checkoutButton = document.querySelector('button#checkout.cart__checkout-button');
+    const checkoutButton = document.getElementById('checkout');
     console.log('Checkout button:', checkoutButton); // Check if the checkout button is found
 
     if (!checkoutButton) {
@@ -498,14 +499,92 @@
       if (totalQuantity < 12 || totalQuantity % 12 !== 0) {
         console.log('Validation failed. Disabling checkout button.');
         warningMessage.style.display = 'block';
-        checkoutButton.disabled = true;
-        checkoutButton.classList.add('checkout-disabled');
+        checkoutButton.disabled = true; // Disable the button
+        checkoutButton.classList.add('checkout-disabled'); // Add the greyed-out style
       } else {
         console.log('Validation passed. Enabling checkout button.');
         warningMessage.style.display = 'none';
-        checkoutButton.disabled = false;
-        checkoutButton.classList.remove('checkout-disabled');
+        checkoutButton.disabled = false; // Enable the button
+        checkoutButton.classList.remove('checkout-disabled'); // Remove the greyed-out style
       }
+
+      console.log('Checkout button disabled:', checkoutButton.disabled);
+      console.log('Checkout button classes:', checkoutButton.className);
+    }
+
+    // Validate on page load
+    console.log('Validating on page load...');
+    validateCart();
+
+    // Validate on quantity change
+    cartForm.addEventListener('input', function (event) {
+      console.log('Input event triggered:', event.target); // Log the input event
+      if (event.target.name === 'updates[]') {
+        validateCart();
+      }
+    });
+
+    // Use event delegation for + and - buttons
+    cartForm.addEventListener('click', function (event) {
+      if (event.target.classList.contains('quantity__button')) {
+        console.log('Quantity button clicked'); // Log button click
+
+        // Find the associated input field
+        const quantityInput = event.target.closest('.quantity').querySelector('input[name="updates[]"]');
+        if (quantityInput) {
+          // Trigger validation after the input value updates
+          setTimeout(() => {
+            console.log('Quantity updated to:', quantityInput.value); // Log updated value
+            validateCart();
+          }, 0);
+        }
+      }
+    });
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    console.log('Script loaded'); // Check if the script is loaded
+
+    const cartForm = document.getElementById('cart');
+    console.log('Cart form:', cartForm); // Check if the cart form is found
+
+    function validateCart() {
+      const checkoutButton = document.getElementById('checkout'); // Re-select the button
+      if (!checkoutButton) {
+        console.error('Checkout button not found during validation.');
+        return;
+      }
+
+      const warningMessage = document.querySelector('.cart-warning-message');
+      const quantityInputs = cartForm.querySelectorAll('input[name="updates[]"]');
+      console.log('Quantity inputs:', quantityInputs); // Check if quantity inputs are found
+
+      let totalQuantity = 0;
+
+      quantityInputs.forEach(input => {
+        const value = parseInt(input.value, 10) || 0;
+        console.log('Input value:', value); // Log each input value
+        totalQuantity += value;
+      });
+
+      console.log('Total quantity:', totalQuantity); // Log the total quantity
+
+      if (totalQuantity < 12 || totalQuantity % 12 !== 0) {
+        console.log('Validation failed. Disabling checkout button.');
+        warningMessage.style.display = 'block';
+        checkoutButton.disabled = true; // Disable the button
+        checkoutButton.classList.add('checkout-disabled'); // Add the greyed-out style
+      } else {
+        console.log('Validation passed. Enabling checkout button.');
+        warningMessage.style.display = 'none';
+        checkoutButton.disabled = false; // Enable the button
+        checkoutButton.classList.remove('checkout-disabled'); // Remove the greyed-out style
+      }
+
+      console.log('Checkout button disabled:', checkoutButton.disabled);
+      console.log('Checkout button classes:', checkoutButton.className);
     }
 
     // Validate on page load
