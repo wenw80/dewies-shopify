@@ -520,14 +520,13 @@
       }
     });
 
-    // Listen for clicks on + and - buttons
-    const quantityButtons = cartForm.querySelectorAll('.quantity__button');
-    quantityButtons.forEach(button => {
-      button.addEventListener('click', function () {
+    // Use event delegation for + and - buttons
+    cartForm.addEventListener('click', function (event) {
+      if (event.target.classList.contains('quantity__button')) {
         console.log('Quantity button clicked'); // Log button click
 
         // Find the associated input field
-        const quantityInput = button.closest('.quantity').querySelector('input[name="updates[]"]');
+        const quantityInput = event.target.closest('.quantity').querySelector('input[name="updates[]"]');
         if (quantityInput) {
           // Trigger validation after the input value updates
           setTimeout(() => {
@@ -535,7 +534,7 @@
             validateCart();
           }, 0);
         }
-      });
+      }
     });
   });
 </script>
