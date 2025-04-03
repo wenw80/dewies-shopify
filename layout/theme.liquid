@@ -262,6 +262,20 @@
       }
     {% endstyle %}
 
+    <style>
+      body {
+        font-family: 'Quicksand', sans-serif !important;
+      }
+
+      h1, h2, h3, h4, h5, h6 {
+        font-family: 'Quicksand', sans-serif !important;
+      }
+
+      p, a, span, div {
+        font-family: 'Quicksand', sans-serif !important;
+      }
+    </style>
+
     {{ 'base.css' | asset_url | stylesheet_tag }}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
