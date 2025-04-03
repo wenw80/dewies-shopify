@@ -9,44 +9,44 @@
  */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "collection_list_h4tXft": {
+      "type": "collection-list",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "featured_collection_j4bxB4": {
+          "type": "featured_collection",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "collection": ""
           }
         },
-        "button": {
-          "type": "buttons",
+        "featured_collection_hGGemk": {
+          "type": "featured_collection",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "collection": ""
+          }
+        },
+        "featured_collection_rp73Lj": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": ""
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
+        "featured_collection_j4bxB4",
+        "featured_collection_hGGemk",
+        "featured_collection_rp73Lj"
       ],
       "settings": {
-        "image": "shopify://shop_images/Small-Web-Banner-with-Round-Logo_jpg.webp",
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "image_behavior": "none",
-        "desktop_content_position": "bottom-center",
-        "desktop_content_alignment": "center",
-        "show_text_box": false,
-        "color_scheme": "scheme-3",
-        "stack_images_on_mobile": false,
-        "mobile_content_alignment": "center",
-        "show_text_below": false
+        "title": "Collections",
+        "heading_size": "h1",
+        "image_ratio": "square",
+        "columns_desktop": 3,
+        "color_scheme": "",
+        "show_view_all": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
     "featured_collection": {
@@ -79,7 +79,7 @@
     }
   },
   "order": [
-    "image_banner",
+    "collection_list_h4tXft",
     "featured_collection"
   ]
 }
